@@ -1,0 +1,12 @@
+version : "3.7"
+services:
+  node:
+    build: .
+    init: true
+    restart: on-failure:3
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/gtoken.json
+      - G_PEOJECT_ID=YOUR_GCP_PROJECT_HERE
+      - D_TOKEN=YOUR_DISCORD_TOKEN_HERE
+    volumes:
+      - ./gtoken.json:/app/gtoken.json
