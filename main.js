@@ -11,7 +11,6 @@ client.on('ready', () => {
 });
 
 client.on("messageCreate", async (msg) => {
-    console.log(msg.flags.bitfield)
     if(! msg.flags.has(MessageFlags.FLAGS.IS_CROSSPOST)) return
     const result = await translate(msg.content,"en","ja")
     msg.channel.send(result)
@@ -30,9 +29,8 @@ async function translate(text, sourceLang, targetLang) {
         targetLanguageCode: targetLang,
     };
     const res = await translationClient.translateText(req);
-    console.log(res)
     for (const elem of res) {
-        if (elem == null) // なぜかnullがレスポンスに含まれる
+        if (elem == null)
             continue;
         return elem["translations"][0]["translatedText"];
     }
